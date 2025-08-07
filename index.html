@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>UPLCC</title>
+  </head>
+  <body>	
+    <input type="file" id="filein" class="filein"/>
+    <p id="ts" class="ts">在上面的文件选择器选择一个包含游戏信息的txt文件即可开始游戏</p>
+<h3 id="tsa" class="tsa"></h3>
+    <div id="dt" class="dt">
+  <div id="user" class="user"></div>
+  <div id="win" class="win"></div>
+<p id="za" class="za"></p>
+</div>
+<button onclick="fx=1;ifmove();" class="al" style="left:10vw;">上</button>
+<button onclick="fx=2;ifmove();" class="al" style="left:30vw;">下</button>
+<button onclick="fx=3;ifmove();" class="al" style="left:50vw;">左</button>
+<button onclick="fx=4;ifmove();" class="al" style="left:70vw;">右</button>
+  </body>
+<style>
+*{
+margin:0;
+padding:0;
+}
+.dt{
+top:150px;
+position: absolute;
+z-index:1;
+left: 0;
+right:0;
+margin:0 auto;
+width: 360px;
+height: 360px;
+background-color:#F0F0F0;
+background-image: 
+linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+background-size: 20px 20px;
+}
+.user{
+position:absolute;
+z-index:999;
+width:20px;
+height:20px;
+background-color:#d4f7ff;
+}
+.win{
+position:absolute;
+z-index:500;
+width:20px;
+height:20px;
+background-color:#ffe494;
+}
+.no{
+position:absolute;
+width:20px;
+height:20px;
+background-color:gray;
+}
+.za{
+line-height:20px;
+position:absolute;
+z-index:99;
+top:0;
+left:0;
+}
+.al{
+position:absolute;
+top:550px;
+width:20vw;
+height:20vw;
+}
+.tsa{
+text-align:center;
+display:none;
+}
+</style>
+<script>
+var filetext="";
+var dtxs="";
+var jsa=0;
+var csa=0;
+var wins=[];
+var bs=0;
+var fx=0;
+var map=new Map([["x",0],["y",0]]);
+var pd=new Map();
+document.getElementById("filein").addEventListener("change",(event)=>{
+ts.style.display="none";
+bs=0;
+fx=0;
+jsa=0;
+csa=0;
+wins=[];
+pd.clear();
+dtxs="";
+const filel=event.target.files[0];
+const reader=new FileReader();
+reader.onload=function (e){
+filetext=e.target.result;
+start();
+}
+reader.readAsText(filel);
+});
+function start(){
+tsa.style.display="none";
+map.set("x",0);
+map.set("y",0);
+move();
+jsa=0;
+csa=0;
+for(var i=0;i<filetext.length;i++){
+if(i!==0&&i%18==0){
+dtxs+="<br>";
+jsa-=18;
+csa++;
+}
+if(filetext[i]==1){
+dtxs+="<div id='no"+i+"' class='no' data-text='1' style='left:"+20*jsa+"px;'></div>";
+pd.set(i);
+}
+if(filetext[i]==2){
+win.style.left=20*jsa+"px";
+win.style.top=20*csa+"px";
+wins.push(jsa);
+wins.push(csa);
+}
+jsa++;
+}
+document.getElementById("za").innerHTML=dtxs;
+}
+function ifmove(){
+if(fx==1){
+if(map.get("y")!==0&&!pd.has(bs-18)){
+map.set("y",map.get("y")-1);
+move();
+bs-=18;
+}
+}
+if(fx==2){
+if(map.get("y")!==17&&!pd.has(bs+18)){
+map.set("y",map.get("y")+1);
+bs+=18;
+move();
+}
+}
+if(fx==3){
+if(map.get("x")!==0&&!pd.has(bs-1)){
+map.set("x",map.get("x")-1);
+move();
+bs-=1;
+}
+}
+if(fx==4){
+if(map.get("x")!==17&&!pd.has(bs+1)){
+map.set("x",map.get("x")+1);
+bs++;
+move();
+}
+}
+if(map.get("x")==wins[0]&&map.get("y")==wins[1]){
+tsa.style.display="block";
+document.getElementById("tsa").innerHTML="游戏胜利";
+}
+}
+function move(){
+user.style.left=20*map.get("x")+"px";
+user.style.top=20*map.get("y")+"px";
+}
+</script>
+</html>
