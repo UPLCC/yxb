@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>UPLCC</title>
+  </head>
+  <body>	
+    <div id="dt" class="dt">
+<div id="user" class="user"></div>
+<p id="za" class="za"></p>
+<div id="win" class="win"></div>
+</div>
+<button onclick="xz=1;start();" style="left:0vw;" class="al">空气</button>
+<button onclick="xz=2;start();" style="left:20vw;" class="al">墙</button>
+<button onclick="xz=3;start();" style="left:40vw;" class="al">空气墙</button>
+<button onclick="xz=4;start();" style="left:60vw;" class="al">假墙</button>
+<button onclick="xz=5;start();" style="left:80vw;" class="al">终点</button>
+<h3 id="ts" class="ts">生成结果</h3>
+<p id="tsa" class="tsa"></p>
+  </body>
+<style>
+*{
+margin:0;
+padding:0;
+}
+.za{
+line-height:20px;
+position:absolute;
+z-index:99;
+top:0;
+left:0;
+}
+.dt{
+top:300px;
+position: absolute;
+z-index:1;
+left: 0;
+right:0;
+margin:0 auto;
+width: 360px;
+height: 360px;
+background-color:#F0F0F0;
+background-image: 
+linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+background-size: 20px 20px;
+}
+.user{
+position:absolute;
+z-index:999;
+width:20px;
+height:20px;
+background-color:#d4f7ff;
+}
+.win{
+position:absolute;
+z-index:500;
+width:20px;
+height:20px;
+background-color:#ffe494;
+}
+.no{
+position:absolute;
+width:20px;
+height:20px;
+background-color:gray;
+}
+.al{
+position:absolute;
+top:675px;
+width:20vw;
+height:20vw;
+}
+.kqq{
+position:absolute;
+width:14px;
+height:14px;
+border:3px solid #eeffef;
+}
+.jqa{
+position:absolute;
+width:14px;
+height:14px;
+background-color:gray;
+border:3px solid white;
+}
+.kqaa{
+position:absolute;
+width:14px;
+height:14px;
+border:3px solid #fff0c6;;
+}
+</style>
+<script>
+xs="";
+dtxs="";
+jsa=0;
+csa=0;
+zdsz=false;
+function start(){
+if(jsa!==0&&jsa%18==0){
+dtxs+="<br>";
+jsa-=18;
+csa++;
+}
+if(xz==1){
+dtxs+="<div class='kqaa' data-text='0' style='left:"+20*jsa+"px;'></div>";
+document.getElementById("za").innerHTML=dtxs;
+xs+=0;
+document.getElementById("tsa").innerHTML=xs;
+}
+if(xz==2){
+dtxs+="<div class='no' data-text='1' style='left:"+20*jsa+"px;'></div>";
+document.getElementById("za").innerHTML=dtxs;
+xs+=1;
+document.getElementById("tsa").innerHTML=xs;
+}
+if(xz==3){
+dtxs+="<div class='kqq' data-text='0' style='left:"+20*jsa+"px;'></div>";
+document.getElementById("za").innerHTML=dtxs;
+xs+=3;
+document.getElementById("tsa").innerHTML=xs;
+}
+if(xz==4){
+dtxs+="<div class='jqa' data-text='0' style='left:"+20*jsa+"px;'></div>";
+document.getElementById("za").innerHTML=dtxs;
+xs+=4;
+document.getElementById("tsa").innerHTML=xs;
+}
+if(zdsz&&xz==5){
+jsa-=1;
+}
+if(xz==5&&!zdsz){
+win.style.left=20*jsa+"px";
+win.style.top=20*csa+"px";
+zdsz=true;
+xs+=2;
+document.getElementById("tsa").innerHTML=xs;
+}
+jsa++;
+}
+</script>
+</html>
