@@ -6,7 +6,7 @@
   </head>
   <body>	
     <input type="file" id="filein" class="filein"/>
-    <p id="ts" class="ts">在上面的文件选择器选择一个包含游戏信息的txt文件即可开始游戏</p>
+    <p id="ts" class="ts" onclick="tz++;if(tz==5){tz=0;tza();}">在上面的文件选择器选择一个包含游戏信息的txt文件即可开始游戏，点我5次在线编辑地图</p>
 <h3 id="tsa" class="tsa"></h3>
     <div id="dt" class="dt">
   <div id="user" class="user"></div>
@@ -83,6 +83,7 @@ var jsa=0;
 var csa=0;
 var wins=[];
 var bs=0;
+var tz=0;
 var fx=0;
 var map=new Map([["x",0],["y",0]]);
 var pd=new Map();
@@ -119,6 +120,12 @@ csa++;
 if(filetext[i]==1){
 dtxs+="<div id='no"+i+"' class='no' data-text='1' style='left:"+20*jsa+"px;'></div>";
 pd.set(i);
+}
+if(filetext[i]==3){
+pd.set(i);
+}
+if(filetext[i]==4){
+dtxs+="<div id='no"+i+"' class='no' data-text='1' style='left:"+20*jsa+"px;'></div>";
 }
 if(filetext[i]==2){
 win.style.left=20*jsa+"px";
@@ -167,6 +174,9 @@ document.getElementById("tsa").innerHTML="游戏胜利";
 function move(){
 user.style.left=20*map.get("x")+"px";
 user.style.top=20*map.get("y")+"px";
+}
+function tza(){
+window.location.href="bj.html";
 }
 </script>
 </html>
