@@ -6,7 +6,9 @@
   </head>
   <body>	
     <input type="file" id="filein" class="filein"/>
-    <p id="ts" class="ts" onclick="tz++;if(tz==5){tz=0;tza();}">在上面的文件选择器选择一个包含游戏信息的txt文件即可开始游戏，点我5次在线编辑地图</p>
+    <p id="ts" class="ts" onclick="tz++;if(tz==3){bjzx.style.display='block';albj.style.display='block';}if(tz==5){tz=0;tza();}">在上面的文件选择器选择一个包含游戏信息的txt文件即可开始游戏，点我3次在线编辑地图，点我5次进入地图编辑器</p>
+<input type="text" id="bjzx" class="bjzx" style="display:none;position:absolute;width:150px;" placeholder="在这写地图信息"/>
+<button id="albj" id="albj" style="display:none;position:absolute;left:160px;" onclick="dtxs='';filetext=bjzx.value;start();">生成地图</button>
 <h3 id="tsa" class="tsa"></h3>
     <div id="dt" class="dt">
   <div id="user" class="user"></div>
